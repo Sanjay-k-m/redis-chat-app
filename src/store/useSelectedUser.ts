@@ -1,12 +1,12 @@
 import { User } from "@/db/dummy";
 import { create } from "zustand";
 
-type selectedUserState = {
-  selectedUser: User | null;
-  setSelectedUser: (user: User | null) => void;
+type SelectedUserState = {
+	selectedUser: User | null;
+	setSelectedUser: (user: User | null) => void;
 };
 
-export const useSelectedUser = create<selectedUserState>((set) => ({
-  selectedUser: null,
-  setSelectedUser: (user: User | null) => set({ selectedUser: user }),
+export const useSelectedUser = create<SelectedUserState>((set) => ({
+	selectedUser: null,
+	setSelectedUser: (user: User | null) => set({ selectedUser: user }),
 }));
