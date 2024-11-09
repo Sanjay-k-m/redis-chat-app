@@ -8,14 +8,18 @@ import {
 import { cn } from "@/lib/utils";
 import SideBar from "../SideBar";
 import MessageContainer from "./MessageContainer";
+import { User } from "@/db/dummy";
+import { useSelectedUser } from "@/store/useSelectedUser";
 
 interface ChatLayoutProps {
   defaultLayout: number[] | undefined;
+  users: User[];
 }
 
-const ChatLayout = ({ defaultLayout = [300, 480] }: ChatLayoutProps) => {
+const ChatLayout = ({ defaultLayout = [300, 480], users }: ChatLayoutProps) => {
   const [isMobile, setIsMobile] = useState(false);
   const [isCollapsed, setIsCollapsed] = useState(false);
+  const { selectedUser } = useSelectedUser();
   useEffect(() => {
     const checkScreenWidth = () => {
       setIsMobile(window.innerWidth < 768);
@@ -61,18 +65,27 @@ const ChatLayout = ({ defaultLayout = [300, 480] }: ChatLayoutProps) => {
           isCollapsed && "min-w-[80px] transition-all duration-300 ease-in-out"
         )}
       >
-        <SideBar isCollapsed={isCollapsed} />
+        <SideBar isCollapsed={isCollapsed} users={users} />
       </ResizablePanel>
       <ResizableHandle withHandle />
       <ResizablePanel defaultSize={defaultLayout?.[1] || 480} minSize={30}>
-        {/* <div className="flex justify-center items-center h-full w-full px-10">
-          <div className="flex flex-col justify-center items-center gap-4">
-            <img src="/logo.png" alt="RediStash Logo" className="w-full md:w-2/3 lg:w-1/2" />
-            <p className="text-muted-foreground text-center"> click on a chat to view the messages</p>
+        {!selectedUser ? (
+          <div className="flex justify-center items-center h-full w-full px-10">
+            <div className="flex flex-col justify-center items-center gap-4">
+              <img
+                src="/logo.png"
+                alt="RediStash Logo"
+                className="w-full md:w-2/3 lg:w-1/2"
+              />
+              <p className="text-muted-foreground text-center">
+                {" "}
+                click on a chat to view the messages
+              </p>
+            </div>
           </div>
-
-        </div> */}
-        <MessageContainer />
+        ) : (
+          <MessageContainer />
+        )}
       </ResizablePanel>
     </ResizablePanelGroup>
   );
