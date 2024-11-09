@@ -1,8 +1,11 @@
 import Image from "next/image";
 import AuthButtons from "./AuthButtons";
+import { getKindeServerSession } from "@kinde-oss/kinde-auth-nextjs/server";
+import { redirect } from "next/navigation";
 
 const page = async () => {
-
+const {isAuthenticated} = getKindeServerSession();
+if(await isAuthenticated()) return redirect("/");
 	return (
 		<div className='flex h-screen w-full'>
 			<div
@@ -16,7 +19,7 @@ const page = async () => {
         pointer-events-none select-none -z-1'
 				/>
 
-				<div className='flex flex-col gap-2 px-4 xl:ml-40 text-center md:text-start font-semibold'>
+				<div className='flex flex-col gap-2 px-4 xl:ml-40 text-center md:text-start font-semibold '>
 					<Image
 						src={"/logo.png"}
 						alt='RediStash Logo'
