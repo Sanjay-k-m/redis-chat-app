@@ -7,6 +7,7 @@ import {
 } from "../ui/resizable";
 import { cn } from "@/lib/utils";
 import SideBar from "../SideBar";
+import MessageContainer from "./MessageContainer";
 
 interface ChatLayoutProps {
   defaultLayout: number[] | undefined;
@@ -64,13 +65,14 @@ const ChatLayout = ({ defaultLayout = [300, 480] }: ChatLayoutProps) => {
       </ResizablePanel>
       <ResizableHandle withHandle />
       <ResizablePanel defaultSize={defaultLayout[1]} minSize={30}>
-        <div className="flex justify-center items-center h-full w-full px-10">
+        {/* <div className="flex justify-center items-center h-full w-full px-10">
           <div className="flex flex-col justify-center items-center gap-4">
             <img src="/logo.png" alt="RediStash Logo" className="w-full md:w-2/3 lg:w-1/2" />
             <p className="text-muted-foreground text-center"> click on a chat to view the messages</p>
           </div>
 
-        </div>
+        </div> */}
+        <MessageContainer />
       </ResizablePanel>
     </ResizablePanelGroup>
   );
