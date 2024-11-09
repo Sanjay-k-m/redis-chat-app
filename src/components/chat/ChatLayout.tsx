@@ -44,7 +44,7 @@ const ChatLayout = ({ defaultLayout = [300, 480] }: ChatLayoutProps) => {
       }}
     >
       <ResizablePanel
-        defaultSize={defaultLayout[0]}
+        defaultSize={defaultLayout?.[0]}
         collapsedSize={8}
         collapsible={true}
         minSize={isMobile ? 0 : 24}
@@ -64,7 +64,7 @@ const ChatLayout = ({ defaultLayout = [300, 480] }: ChatLayoutProps) => {
         <SideBar isCollapsed={isCollapsed} />
       </ResizablePanel>
       <ResizableHandle withHandle />
-      <ResizablePanel defaultSize={defaultLayout[1]} minSize={30}>
+      <ResizablePanel defaultSize={defaultLayout?.[1] || 480} minSize={30}>
         {/* <div className="flex justify-center items-center h-full w-full px-10">
           <div className="flex flex-col justify-center items-center gap-4">
             <img src="/logo.png" alt="RediStash Logo" className="w-full md:w-2/3 lg:w-1/2" />
